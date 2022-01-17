@@ -9,7 +9,10 @@
 export DRONE_DEVICE_ID
 
 # Source ROS paths
+
+set +u # poorly coded script don't survive erroring on unbound variables (mentions AMENT_TRACE_SETUP_FILES)
 . /opt/ros/${ROS_DISTRO}/setup.bash
+set -u
 
 export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
