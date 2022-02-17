@@ -1,14 +1,12 @@
-name: Build
+name: tii-fog-ros-base-image
 
 on:
   push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
 
 jobs:
   build:
-    name: Build
+    name: tii-fog-ros-base-image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

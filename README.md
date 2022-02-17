@@ -38,3 +38,13 @@ Also strictly speaking, as a hack for security it would be possible to have this
 a concrete container as a base layer and then on its build run `$ apt remove some-dep`, i.e.
 dependencies/files can be deleted from upper layers.
 Layer dir/file deletions don't use much space. :)
+
+
+Build docker image
+------------------
+
+If you need to build the fog-ros-base-image to be used in your local docker environmetn for development purposes the command to be used is:
+
+```
+$ docker build -t tii-fog-ros-base-image:devel -f Dockerfile .
+```

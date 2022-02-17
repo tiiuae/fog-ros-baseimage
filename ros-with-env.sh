@@ -16,12 +16,10 @@ set -u
 
 export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
-# TODO: are these following two necessary? where they are defined
-
+# MISSION_DATA_RECORDER_QOS_OVERRIDES is needed by mission-data-recorder only.
+# FASTRTPS_DEFAULT_PROFILES_FILE defines FastDDS default profiles used in FOG.
 # Define generic ROS2 profile contiguration file location
-# export FASTRTPS_DEFAULT_PROFILES_FILE=/opt/ros/${ROS_DISTRO}/DEFAULT_FASTRTPS_PROFILES.xml
-
-# export MISSION_DATA_RECORDER_QOS_OVERRIDES="/opt/ros/${ROS_DISTRO}/share/mission-data-recorder/fog_qos_overrides.yaml"
+export FASTRTPS_DEFAULT_PROFILES_FILE=/enclave/DEFAULT_FASTRTPS_PROFILES.xml
 
 # run actual ros command with now hopefully all the right environment details filled in
 exec -- $@
