@@ -5,10 +5,6 @@
 # Source local variables for this script
 . /enclave/drone_device_id
 
-# TODO: Need to have indoor settings in a file that can be sourced
-# Proposal:
-# . /enclave/indoor_settings
-
 # Export global environment variables
 export DRONE_DEVICE_ID
 
