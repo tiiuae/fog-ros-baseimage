@@ -1,4 +1,4 @@
-name: tii-fog-ros-base-image
+name: fog-ros-baseimage
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: tii-fog-ros-base-image
+    name: fog-ros-baseimage
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

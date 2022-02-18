@@ -46,5 +46,5 @@ Build docker image
 If you need to build the fog-ros-base-image to be used in your local docker environmetn for development purposes the command to be used is:
 
 ```
-$ docker build -t tii-fog-ros-base-image:devel -f Dockerfile .
+$ docker build -t ghcr.io/tiiuae/fog-ros-baseimage:devel .
 ```
