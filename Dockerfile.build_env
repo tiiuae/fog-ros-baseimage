@@ -1,0 +1,22 @@
+# ROS2 builder base image.
+# This image can be used to build FOG ROS2 nodes.
+ARG ROS_DISTRO="galactic"
+FROM ghcr.io/tiiuae/fog-ros-baseimage as fog-ros-baseimage-builder
+
+ARG UID=1001
+ARG GID=1001
+
+# Install build dependencies
+RUN apt-get update -y && apt-get install -y --no-install-recommends \
+    curl \
+    python3-bloom \
+    fakeroot \
+    dh-make \
+    libboost-dev \
+    ros-${ROS_DISTRO}-rmw-fastrtps-cpp \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN groupadd -g $GID builder && \
+    useradd -m -u $UID -g $GID -g builder builder && \
+    usermod -aG sudo builder && \
+    echo 'builder ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers

@@ -43,8 +43,17 @@ Layer dir/file deletions don't use much space. :)
 Build docker image
 ------------------
 
-If you need to build the fog-ros-base-image to be used in your local docker environmetn for development purposes the command to be used is:
+If you need to build the fog-ros-baseimage to be used in your local docker environment for development purposes the command to be used is:
 
 ```
-$ docker build -t ghcr.io/tiiuae/fog-ros-baseimage:devel .
+$ docker build -t ghcr.io/tiiuae/fog-ros-baseimage .
+```
+
+Build build environment docker image
+------------------------------------
+
+Following command shows how to build your local docker image for building ROS2 nodes:
+
+```
+$ docker build -t ghcr.io/tiiuae/fog-ros-baseimage-build-env -f Dockerfile.build_env .
 ```
