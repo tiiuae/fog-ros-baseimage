@@ -16,6 +16,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-rmw-fastrtps-cpp \
     && rm -rf /var/lib/apt/lists/*
 
+# dedicated user because ROS builds can complain if building as root
 RUN groupadd -g $GID builder && \
     useradd -m -u $UID -g $GID -g builder builder && \
     usermod -aG sudo builder && \
