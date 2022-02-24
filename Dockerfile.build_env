@@ -1,9 +1,8 @@
 # ROS2 builder base image.
 # This image can be used to build FOG ROS2 nodes.
-ARG FROM_IMAGE=ghcr.io/tiiuae/fog-ros-baseimage
-FROM $FROM_IMAGE as fog-ros-baseimage-builder
+ARG ROS_DISTRO="galactic"
+FROM ghcr.io/tiiuae/fog-ros-baseimage as fog-ros-baseimage-builder
 
-ARG ROS_DISTRO=galactic
 ARG UID=1001
 ARG GID=1001
 

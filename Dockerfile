@@ -1,5 +1,4 @@
-ARG FROM_IMAGE=ros:galactic-ros-core
-FROM $FROM_IMAGE
+FROM ros:galactic-ros-core
 
 ARG ROS_DISTRO=galactic
 
