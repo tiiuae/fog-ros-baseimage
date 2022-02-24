@@ -49,11 +49,17 @@ If you need to build the fog-ros-baseimage to be used in your local docker envir
 $ docker build -t ghcr.io/tiiuae/fog-ros-baseimage .
 ```
 
-Build build environment docker image
+Build build-environment docker image
 ------------------------------------
 
 Following command shows how to build your local docker image for building ROS2 nodes:
 
 ```
 $ docker build -t ghcr.io/tiiuae/fog-ros-baseimage-build-env -f Dockerfile.build_env .
+```
+
+The build argument FROM_IMAGE can be used to change the base image of build-environment. For example if you have a local image under development:
+
+```
+$ docker build --build-arg FROM_IMAGE=ghcr.io/tiiuae/fog-ros-baseimage:devel -t ghcr.io/tiiuae/fog-ros-baseimage-build-env:devel -f Dockerfile.build_env .
 ```
