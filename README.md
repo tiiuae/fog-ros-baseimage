@@ -1,6 +1,56 @@
 Base container image for FOG ROS apps
 
 
+Drawing
+-------
+
+```
+                            │
+                            │
+                            │
+                            │
+fog-ros-baseimage repo      │       Concrete repos
+                            │
+                            │
+                            │       Multi-stage build
+                            │  ┌─────────────────────────┐
+                            │  │                         │
+                            │  │   ┌─────────────────┐   │
+                            │  │   │                 │   │
+                            │  │   │  Builder        │   │
+┌────────────────┐             │   │                 │   │
+│                │             │   │  ┌────────────┐ │   │
+│  Builder image ├─────────────┼───►  │ Compile ROS│ │   │
+│                │ Compiler,   │   │  │ node       │ │   │
+└────────────────┘ other build │   │  └─┬──────────┘ │   │
+                   tools       │   │    │            │   │
+                               │   └────┼────────────┘   │
+                               │        │                │
+                               │ ┌──────┘                │
+                               │ │                       │
+                               │ │ ┌───────────────┐     │
+                               │ │ │               │     │
+                               │ │ │ Runtime build │     │    ┌─────────────┐
+                               │ │ │               │     │    │             │
+                               │ │ │ ┌───────────┐ ├─────┼────► Final image │
+┌────────────┐                 │ └─┼─►Add program│ │     │    │             │
+│            │                 │   │ └───────────┘ │     │    └─────────────┘
+│ Base image ├─────────────────┼───►               │     │
+│            │                 │   └───────────────┘     │
+└────────────┘                 │                         │
+                               └─────────────────────────┘
+```
+
+
+Interesting files
+-----------------
+
+| File               | Purpose                                     |
+|--------------------|---------------------------------------------|
+| Dockerfile         | Base image for concrete ROS projects        |
+| Dockerfile.builder | Build environment for concrete ROS projects |
+
+
 Why
 ---
 
@@ -55,5 +105,5 @@ Build build environment docker image
 Following command shows how to build your local docker image for building ROS2 nodes:
 
 ```
-$ docker build -t ghcr.io/tiiuae/fog-ros-baseimage-build-env -f Dockerfile.build_env .
+$ docker build -t ghcr.io/tiiuae/fog-ros-baseimage-build-env -f Dockerfile.builder .
 ```
