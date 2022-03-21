@@ -1,6 +1,6 @@
-FROM ros:galactic-ros-core
-
 ARG ROS_DISTRO=galactic
+
+FROM ros:${ROS_DISTRO}-ros-core
 
 ARG UID=1000
 ARG GID=1000
@@ -12,6 +12,7 @@ RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public
 RUN apt install -y \
 	ros-${ROS_DISTRO}-geodesy \
 	ros-${ROS_DISTRO}-rclcpp \
+	ros-${ROS_DISTRO}-tf2-ros \
 	ros-${ROS_DISTRO}-rmw-fastrtps-cpp
 
 # install packages from release 6.0.1

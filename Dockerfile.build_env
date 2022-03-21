@@ -7,7 +7,7 @@
 # this is more of a shared constant-like type situation in this file.
 ARG ROS_DISTRO="galactic"
 
-FROM ros:galactic-ros-base
+FROM ros:${ROS_DISTRO}-ros-base
 
 WORKDIR /main_ws/src
 
