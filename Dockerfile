@@ -9,9 +9,10 @@ ARG GID=1000
 RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote $(lsb_release -cs) fog-sw" > /etc/apt/sources.list.d/fogsw-latest.list \
 	&& apt update
 
+# be careful about introducing dependencies here that already come from ros-core, because adding
+# them again here means updating them to latest version, which might not be what we want?
 RUN apt install -y \
 	ros-${ROS_DISTRO}-geodesy \
-	ros-${ROS_DISTRO}-rclcpp \
 	ros-${ROS_DISTRO}-tf2-ros \
 	ros-${ROS_DISTRO}-rmw-fastrtps-cpp
 
