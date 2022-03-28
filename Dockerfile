@@ -13,6 +13,7 @@ RUN apt install -y \
 	ros-${ROS_DISTRO}-geodesy \
 	ros-${ROS_DISTRO}-rclcpp \
 	ros-${ROS_DISTRO}-tf2-ros \
+	ros-${ROS_DISTRO}-fastrtps \
 	ros-${ROS_DISTRO}-rmw-fastrtps-cpp
 
 # install packages from release 6.0.1
