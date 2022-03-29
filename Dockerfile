@@ -5,6 +5,15 @@ FROM ros:${ROS_DISTRO}-ros-core
 ARG UID=1000
 ARG GID=1000
 
+# Use FastRTPS as ROS pub/sub messaging subsystem ("middleware") implementation.
+# https://docs.ros.org/en/foxy/How-To-Guides/Working-with-multiple-RMW-implementations.html#specifying-rmw-implementations
+# (an alternative value could be "rmw_cyclonedds_cpp".)
+ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+
+# Configuration for FastRTPS
+COPY DEFAULT_FASTRTPS_PROFILES.xml /
+ENV FASTRTPS_DEFAULT_PROFILES_FILE=/DEFAULT_FASTRTPS_PROFILES.xml
+
 # so we can download our own-produced components
 RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote $(lsb_release -cs) fog-sw" > /etc/apt/sources.list.d/fogsw-latest.list \
 	&& apt update

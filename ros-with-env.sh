@@ -14,12 +14,5 @@ set +u # poorly coded script don't survive erroring on unbound variables (mentio
 . /opt/ros/${ROS_DISTRO}/setup.bash
 set -u
 
-export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-
-# MISSION_DATA_RECORDER_QOS_OVERRIDES is needed by mission-data-recorder only.
-# FASTRTPS_DEFAULT_PROFILES_FILE defines FastDDS default profiles used in FOG.
-# Define generic ROS2 profile contiguration file location
-export FASTRTPS_DEFAULT_PROFILES_FILE=/enclave/DEFAULT_FASTRTPS_PROFILES.xml
-
 # run actual ros command with now hopefully all the right environment details filled in
 exec -- $@
