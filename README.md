@@ -56,6 +56,7 @@ More documentation
 
 - [Rationale/design of this base image](docs/rationale-design.md)
 - [Version pinning plan for base image](docs/version-pinning-plan.md)
+- [Container checklist](docs/container-checklist.md)
 
 
 Build docker image
