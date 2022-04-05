@@ -19,14 +19,14 @@ When all of these are ready, we're able to get rid of FOG Ubuntu:
 | Level | Program                                                                                       | Notes                          |
 |-------|-----------------------------------------------------------------------------------------------|--------------------------------|
 | 0     | [micrortps-agent](https://github.com/tiiuae/px4_ros_com/tree/DP-2046-containerize)            | committed, version problem     |
-| 0     | mocap_pose                                                                                    | PoC                            |
+| 0     | [mocap_pose](https://github.com/tiiuae/mocap_pose/tree/DP-2044-container)                     | committed, version problem     |
 | 0     | [rplidar](https://github.com/tiiuae/rplidar_ros2/blob/DP-2048-container/Dockerfile)           | committed, version problem     |
 | 0     | mavlink-router                                                                                | (already good)                 |
 | 0     | [control-interface](https://github.com/tiiuae/control_interface/tree/DP-2042-container)       | committed, version problem     |
 | 0     | [octomap-server](https://github.com/tiiuae/octomap_server2/blob/DP-2043-container/Dockerfile) | committed, version problem     |
 | 0     | navigation                                                                                    | Manuel                         |
 | 0     | fog-bumper                                                                                    | Manuel                         |
-| 0     | depthai_ctrl                                                                                  |                                |
+| 0     | depthai_ctrl                                                                                  | Jari? (PoC: compiles)          |
 | 0     | cloud-link                                                                                    | (done earlier)                 |
 | 0     | mission-engine                                                                                | (done earlier)                 |
 | 0     | provisioning-agent                                                                            | (done earlier)                 |
