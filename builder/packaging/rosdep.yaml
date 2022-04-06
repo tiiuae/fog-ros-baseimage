@@ -1,0 +1,20 @@
+dynamicEDT3D:
+    ubuntu: ros-galactic-dynamic-edt-3d
+fastcdr:
+    ubuntu: ros-galactic-fastcdr=1.0.22*
+fastrtps:
+    ubuntu: ros-galactic-fastrtps=2.5.0*
+fastrtps_cmake_module:
+    ubuntu: ros-galactic-fastrtps-cmake-module=2.0.4*
+fog_msgs:
+    ubuntu: ros-galactic-fog-msgs=0.0.8*
+foonathan_memory_vendor:
+    ubuntu: ros-galactic-foonathan-memory-vendor=1.1.0*
+px4_msgs:
+    ubuntu: ros-galactic-px4-msgs=3.0.0*
+rosidl_default_generators:
+    ubuntu: ros-galactic-rosidl-default-generators
+rosidl_typesupport_fastrtps_c:
+    ubuntu: ros-galactic-rosidl-typesupport-fastrtps-c=2.0.4*
+rosidl_typesupport_fastrtps_cpp:
+    ubuntu: ros-galactic-rosidl-typesupport-fastrtps-cpp=2.0.4*
