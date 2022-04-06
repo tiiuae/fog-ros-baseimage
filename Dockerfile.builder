@@ -21,12 +21,16 @@ RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public
 
 # Install build dependencies
 # - ros-<DISTRO>-rmw-fastrtps-cpp is needed for building msgs (fog-msgs, px4-msgs)
+#
+# WARNING: the same FastRTPS pinning happens in Dockerfile, please update that if you change this!
+#   (see the other file for rationale. we need pinning in builder also due to micrortps-agent linking directly to fastrtps)
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
     curl \
     python3-bloom \
     fakeroot \
     dh-make \
     libboost-dev \
+    ros-${ROS_DISTRO}-fastrtps=2.3.4-1focal.20220210.213911 \
     ros-${ROS_DISTRO}-rmw-fastrtps-cpp \
     && rm -rf /var/lib/apt/lists/*
 

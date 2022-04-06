@@ -20,6 +20,7 @@ RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public
 # them again here means updating them to latest version, which might not be what we want?
 #
 # FastRTPS pinned because our SSRC repo had newer version which was incompatible with our current applications.
+# WARNING: the same pinning happens in Dockerfile.builder, please update that if you change this!
 # TODO: remove pinning once it's no longer required
 RUN apt install -y \
 	ros-${ROS_DISTRO}-geodesy \
