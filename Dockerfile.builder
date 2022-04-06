@@ -17,7 +17,7 @@ ARG GID=1001
 
 # needs to be done before FastRTPS installation because we seem to have have newer version of that
 # package in our repo. also fast-dds-gen seems to only be available from this repo.
-RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote focal fog-sw" >> /etc/apt/sources.list
+RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote $(lsb_release -cs) fog-sw" > /etc/apt/sources.list.d/fogsw-latest.list
 
 # Install build dependencies
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
