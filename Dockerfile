@@ -7,9 +7,10 @@ FROM ros:${ROS_DISTRO}-ros-core
 # (an alternative value could be "rmw_cyclonedds_cpp".)
 ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
-# Configuration for FastRTPS
-COPY DEFAULT_FASTRTPS_PROFILES.xml /
-ENV FASTRTPS_DEFAULT_PROFILES_FILE=/DEFAULT_FASTRTPS_PROFILES.xml
+# Configuration for FastRTPS. don't put it in root or workdir of an app because if ENV points to it
+# and it's in app's workdir, it'll get read twice and errors happen.
+COPY DEFAULT_FASTRTPS_PROFILES.xml /etc/
+ENV FASTRTPS_DEFAULT_PROFILES_FILE=/etc/DEFAULT_FASTRTPS_PROFILES.xml
 
 # so we can download our own-produced components
 RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote $(lsb_release -cs) fog-sw" > /etc/apt/sources.list.d/fogsw-latest.list \
