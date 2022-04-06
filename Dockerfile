@@ -2,9 +2,6 @@ ARG ROS_DISTRO=galactic
 
 FROM ros:${ROS_DISTRO}-ros-core
 
-ARG UID=1000
-ARG GID=1000
-
 # Use FastRTPS as ROS pub/sub messaging subsystem ("middleware") implementation.
 # https://docs.ros.org/en/foxy/How-To-Guides/Working-with-multiple-RMW-implementations.html#specifying-rmw-implementations
 # (an alternative value could be "rmw_cyclonedds_cpp".)
@@ -33,10 +30,6 @@ RUN apt install -y \
 RUN apt install -y \
 	ros-${ROS_DISTRO}-fog-msgs=0.0.8-42~git20220104.1d2cf3f \
 	ros-${ROS_DISTRO}-px4-msgs=3.0.0-15~git20220104.c12fcdf
-
-# not clear yet if runner user needs sudo credentials
-RUN groupadd -g $GID runner && \
-    useradd -m -u $UID -g $GID -g runner runner
 
 # wrapper used to launch ros with proper environment variables
 COPY ros-with-env.sh /usr/bin/ros-with-env
