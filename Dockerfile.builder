@@ -20,6 +20,7 @@ ARG GID=1001
 RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote $(lsb_release -cs) fog-sw" > /etc/apt/sources.list.d/fogsw-latest.list
 
 # Install build dependencies
+# - ros-<DISTRO>-rmw-fastrtps-cpp is needed for building msgs (fog-msgs, px4-msgs)
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
     curl \
     python3-bloom \
