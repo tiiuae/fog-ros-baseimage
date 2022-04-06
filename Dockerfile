@@ -20,9 +20,13 @@ RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public
 
 # be careful about introducing dependencies here that already come from ros-core, because adding
 # them again here means updating them to latest version, which might not be what we want?
+#
+# FastRTPS pinned because our SSRC repo had newer version which was incompatible with our current applications.
+# TODO: remove pinning once it's no longer required
 RUN apt install -y \
 	ros-${ROS_DISTRO}-geodesy \
 	ros-${ROS_DISTRO}-tf2-ros \
+    ros-${ROS_DISTRO}-fastrtps=2.3.4-1focal.20220210.213911 \
 	ros-${ROS_DISTRO}-rmw-fastrtps-cpp
 
 # install packages from release 6.0.1
