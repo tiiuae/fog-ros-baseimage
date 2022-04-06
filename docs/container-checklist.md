@@ -51,6 +51,7 @@ Checklist
 | 1     | CI builds don't limit building / pushing                   | It causes developer friction if one can't get software built (or pushed for testing) if non-`main` branches are limited |
 | 1     | No hardcoded ROS distro paths e.g. `/opt/ros/galactic/...` | Use `/opt/ros/${ROS_DISTRO}/setup.bash` or let's make symlink `/opt/ros/CURRENT/...` if we have non-shell path needs  |
 | 1     | FastRTPS implementation configured by the base image       | Don't override `RMW_IMPLEMENTATION` or `FASTRTPS_DEFAULT_PROFILES_FILE` in the concrete container                     |
+| 1     | No `rosdep.yaml` in concrete projects                      | Specify all `rosdep.yaml` items in the base image                                                                     |
 
 
 ### Upcoming checklist items
