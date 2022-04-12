@@ -27,3 +27,5 @@ rosidl_typesupport_fastrtps_c:
     ubuntu: ros-galactic-rosidl-typesupport-fastrtps-c=1.2.1*
 rosidl_typesupport_fastrtps_cpp:
     ubuntu: ros-galactic-rosidl-typesupport-fastrtps-cpp=1.2.1*
+mavsdk:
+    ubuntu: mavsdk=0.42.0*
