@@ -1,3 +1,12 @@
+# This file by itself doesn't add any dependencies to any projects using this, yet.
+# The actual dependencies are declared in package.xml.
+#
+# This is a translation layer from "ROS package" name into the package name used by your distro's
+# package manager (package name can be different in apt/yum/pip repos..).
+#
+# e.g. "px4_msgs in Debian packages means ros-galactic-px4-msgs"
+# see: https://wiki.ros.org/rosdep/rosdep.yaml
+
 dynamicEDT3D:
     ubuntu: ros-galactic-dynamic-edt-3d
 fastcdr:
