@@ -16,7 +16,7 @@ function rosdep_init_update_and_install {
 	        sudo rosdep init
 	fi
 
-	rosdepYamlPath=${mod_dir}/packaging/rosdep.yaml
+	rosdepYamlPath=/packaging/rosdep.yaml
 	if [ -e ${rosdepYamlPath} ]; then
 		# assert that we have remembered to update ROS distro in the rosdep.yaml
 		# (previously we did this replace dynamically, but this is less magic)

@@ -24,8 +24,8 @@ When all of these are ready, we're able to get rid of FOG Ubuntu:
 | 0     | mavlink-router                                                                                | (already good, ready for flight test) |
 | 0     | [control-interface](https://github.com/tiiuae/control_interface/tree/DP-2042-container)       | ✅ ready for flight test       |
 | 0     | [octomap-server](https://github.com/tiiuae/octomap_server2/blob/DP-2043-container/Dockerfile) | ✅ ready for flight test       |
-| 0     | navigation                                                                                    | Manuel                         |
-| 0     | fog-bumper                                                                                    | Manuel                         |
+| 0     | [navigation](https://github.com/tiiuae/navigation/tree/DP-2047-container)                     | ✅ ready for flight test       |
+| 0     | [fog-bumper](https://github.com/tiiuae/fog_bumper/tree/DP-2050-container)                     | ✅ ready for flight test       |
 | 0     | depthai_ctrl                                                                                  | Jari? (PoC: compiles)          |
 | 0     | cloud-link                                                                                    | (done earlier)                 |
 | 0     | mission-engine                                                                                | (done earlier)                 |
