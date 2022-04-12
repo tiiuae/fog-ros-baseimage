@@ -76,26 +76,23 @@ More documentation
 - [Container checklist](docs/container-checklist.md)
 
 
-Build docker image
-------------------
+Development & debug for concrete projects
+-----------------------------------------
 
-If you need to build the fog-ros-baseimage to be used in your local docker environment for development purposes the command to be used is:
-
-```
-$ docker build -t ghcr.io/tiiuae/fog-ros-baseimage .
-```
-
-Build build environment docker image
-------------------------------------
-
-Following command shows how to build your local docker image for building ROS2 nodes:
-
-```
-$ docker build -t ghcr.io/tiiuae/fog-ros-baseimage:builder-latest -f Dockerfile.builder .
-```
+You may have been linked here from concrete project's readme.
+These tips should apply to all our concrete ROS-based projects (mocap_pose, rplidar etc..)
 
 
-### Debug
+### Development tips
+
+All concrete projects should be buildable by "standard Docker-ism:" `$ docker build -t PROJECT_NAME .`.
+
+This is also what the
+[GitHub actions CI workflows](https://github.com/tiiuae/mocap_pose/blob/29299da43a4a487ed3dc5979681afec49422805e/.github/workflows/tii-mocap-pose.yaml#L35)
+effectively do.
+
+
+### Extract the .deb package from the build process
 
 Extract built `.deb` from multi-stage build's builder layer.
 
@@ -114,3 +111,33 @@ You can either copy a known file from the image (with the help of a temporary co
 `$ docker run --rm -it -v "$(pwd):/host" IMAGE_ID cp /path/to.deb /host/`
 
 Or if you're unsure, you can change `cp` to `bash`/`sh` to explore.
+
+
+Development & debug for base images
+-----------------------------------
+
+These tips concern this repository, i.e. the runtime base image and the build environment base image.
+
+
+### Build runtime base image
+
+This image is used as runtime container base image of concrete ROS nodes.
+([Example](https://github.com/tiiuae/px4_ros_com/blob/38649b1f446264b248c982899ce0b08094d56427/Dockerfile#L20))
+
+If you need to build the fog-ros-baseimage to be used in your local docker environment for development purposes the command to be used is:
+
+```
+$ docker build -t ghcr.io/tiiuae/fog-ros-baseimage:latest .
+```
+
+
+### Build build-environment base image
+
+This image is used as build container in multi-stage build of concrete ROS nodes.
+([Example](https://github.com/tiiuae/px4_ros_com/blob/38649b1f446264b248c982899ce0b08094d56427/Dockerfile#L1))
+
+Following command shows how to build your local docker image for building ROS2 nodes:
+
+```
+$ docker build -t ghcr.io/tiiuae/fog-ros-baseimage:builder-latest -f Dockerfile.builder .
+```
