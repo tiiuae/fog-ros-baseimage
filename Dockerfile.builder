@@ -17,7 +17,10 @@ ARG GID=1001
 
 # needs to be done before FastRTPS installation because we seem to have have newer version of that
 # package in our repo. also fast-dds-gen seems to only be available from this repo.
-RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote $(lsb_release -cs) fog-sw" > /etc/apt/sources.list.d/fogsw-latest.list
+# Packages with PKCS#11 features have fog-sw-sros component.
+RUN FOG_DEB_REPO="https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote" \
+    && echo "deb [trusted=yes] ${FOG_DEB_REPO} $(lsb_release -cs) fog-sw" > /etc/apt/sources.list.d/fogsw.list \
+    && echo "deb [trusted=yes] ${FOG_DEB_REPO} $(lsb_release -cs) fog-sw-sros" >> /etc/apt/sources.list.d/fogsw-sros.list
 
 # Install build dependencies
 # - ros-<DISTRO>-rmw-fastrtps-cpp is needed for building msgs (fog-msgs, px4-msgs)
@@ -30,8 +33,8 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     fakeroot \
     dh-make \
     libboost-dev \
-    ros-${ROS_DISTRO}-fastrtps=2.3.4-1focal.20220210.213911 \
-    ros-${ROS_DISTRO}-rmw-fastrtps-cpp \
+    ros-${ROS_DISTRO}-fastrtps=2.5.0-7~git20220310.4ca1f95 \
+    ros-${ROS_DISTRO}-rmw-fastrtps-cpp=5.0.0-7~git20220310.8684e20 \
     && rm -rf /var/lib/apt/lists/*
 
 # dedicated user because ROS builds can complain if building as root.
