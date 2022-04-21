@@ -35,6 +35,16 @@ jobs:
             type=semver,pattern={{version}}
             type=sha
 
+      - name: Container metadata for builder
+        id: meta_builder # referenced from later step
+        uses: docker/metadata-action@v3
+        with:
+          images: ghcr.io/tiiuae/fog-ros-baseimage
+          tags: |
+            type=ref,event=branch,prefix=builder-
+            type=raw,value=builder-latest,enable=${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+            type=sha,prefix=builder-
+
       - name: Build and push base image
         uses: docker/build-push-action@v2
         if: github.event_name == 'push'
@@ -51,5 +61,5 @@ jobs:
           push: true
           context: .
           file: Dockerfile.builder
-          tags: ghcr.io/tiiuae/fog-ros-baseimage:builder-latest
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta_builder.outputs.tags }}
+          labels: ${{ steps.meta_builder.outputs.labels }}
