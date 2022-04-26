@@ -115,6 +115,11 @@ if [ -e ${mod_dir}/debian ]; then
 	cp -r debian debian_bak
 fi
 
+# Speed up builds.
+# In addition to the following environmental variable,
+# --parallel flag is needed in "fakeroot debian/rules binary" call.
+export DEB_BUILD_OPTIONS="parallel=`nproc`"
+
 bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro ${ROS_DISTRO} --place-template-files \
     && sed -i "s/@(DebianInc)@(Distribution)/@(DebianInc)/" debian/changelog.em \
     && [ ! "$distr" = "" ] && sed -i "s/@(Distribution)/${distr}/" debian/changelog.em || : \
@@ -122,7 +127,7 @@ bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro ${ROS_
     && sed -i 's/^\tdh_shlibdeps.*/& --dpkg-shlibdeps-params=--ignore-missing-info/g' debian/rules \
 		&& sed -i "s/\=\([0-9]*\.[0-9]*\.[0-9]*\*\)//g" debian/control \
     && fakeroot debian/rules clean \
-    && fakeroot debian/rules binary || exit 1
+    && fakeroot debian/rules "binary --parallel" || exit 1
 
 echo "[INFO] Clean up."
 
