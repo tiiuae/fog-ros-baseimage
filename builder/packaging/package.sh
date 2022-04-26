@@ -126,8 +126,8 @@ bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro ${ROS_
     && bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro ${ROS_DISTRO} --process-template-files -i ${build_nbr}${git_version_string} \
     && sed -i 's/^\tdh_shlibdeps.*/& --dpkg-shlibdeps-params=--ignore-missing-info/g' debian/rules \
 		&& sed -i "s/\=\([0-9]*\.[0-9]*\.[0-9]*\*\)//g" debian/control \
-    && fakeroot debian/rules clean \
-    && fakeroot debian/rules "binary --parallel" || exit 1
+    && debian/rules clean \
+    && debian/rules "binary --parallel" || exit 1
 
 echo "[INFO] Clean up."
 
