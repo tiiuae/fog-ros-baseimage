@@ -27,7 +27,6 @@ RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
     curl \
     python3-bloom \
-    fakeroot \
     dh-make \
     libboost-dev \
     ros-${ROS_DISTRO}-fastrtps=2.3.4-1focal.20220210.213911 \
