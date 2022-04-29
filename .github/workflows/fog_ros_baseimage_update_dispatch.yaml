@@ -1,0 +1,24 @@
+# This workflow needs to be executed manually when fog-ros-baseimage has been updated.
+name: fog-ros-baseimage-update-dispatch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dispatch:
+    strategy:
+      matrix:
+        repo: [ 
+          'tiiuae/mocap_pose',
+          'tiiuae/px4_ros_com'
+          ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.FOG_ROS_BASEIMAGE_UPDATE_TOKEN }}
+          repository: ${{ matrix.repo }}
+          event-type: fog-ros-baseimage-update
+          # maybe would be good to use github.run_number instead github.run_attempt
+          client-payload: '{ "run_attempt": ${{ github.run_attempt }} }'
