@@ -21,4 +21,4 @@ jobs:
           repository: ${{ matrix.repo }}
           event-type: fog-ros-baseimage-update
           # maybe would be good to use github.run_number instead github.run_attempt
-          client-payload: '{ "run_attempt": ${{ github.run_attempt }} }'
+          client-payload: '{ "image_sha_tag_suffix": ${{ github.run_attempt }} }'
