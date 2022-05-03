@@ -56,7 +56,7 @@ fog-ros-baseimage repo      │       Concrete repos
 
 Concrete project repo is mounted at location `/main_ws/src` inside the build container.
 
-Shared builder script is invoked. This produces a `.deb` file in directory `/main_ws/src`.
+Shared builder script is invoked. This produces a `.deb` file in directory `/main_ws/`.
 
 
 Interesting files

@@ -30,7 +30,6 @@ RUN FOG_DEB_REPO="https://ssrc.jfrog.io/artifactory/ssrc-debian-public-remote" \
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
     curl \
     python3-bloom \
-    fakeroot \
     dh-make \
     libboost-dev \
     ros-${ROS_DISTRO}-fastrtps=2.5.0-7~git20220310.4ca1f95 \
