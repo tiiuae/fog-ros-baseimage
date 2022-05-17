@@ -46,3 +46,11 @@ RUN apt install -y \
 
 # wrapper used to launch ros with proper environment variables
 COPY ros-with-env.sh /usr/bin/ros-with-env
+
+# Install pkcs11-proxy client library
+RUN apt-get update && \
+	apt-get install -y --no-install-recommends \
+        libengine-pkcs11-openssl \
+        libp11-dev \
+        pkcs11-proxy1 && \
+	rm -rf /var/lib/apt/lists/*
