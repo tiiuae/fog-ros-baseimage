@@ -25,7 +25,7 @@ RUN echo "deb [trusted=yes] https://ssrc.jfrog.io/artifactory/ssrc-debian-public
 RUN apt install -y \
 	ros-${ROS_DISTRO}-geodesy \
 	ros-${ROS_DISTRO}-tf2-ros \
-	ros-${ROS_DISTRO}-fastrtps=2.3.4-1focal.20220210.213911 \
+	ros-${ROS_DISTRO}-fastrtps=2.3.4-1focal.20220430.111237 \
 	ros-${ROS_DISTRO}-rmw-fastrtps-cpp
 
 # install packages from release 6.0.1
