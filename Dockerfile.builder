@@ -29,7 +29,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     python3-bloom \
     dh-make \
     libboost-dev \
-    ros-${ROS_DISTRO}-fastrtps=2.3.4-1focal.20220210.213911 \
+    ros-${ROS_DISTRO}-fastrtps=2.3.4-1focal.20220430.111237 \
     ros-${ROS_DISTRO}-rmw-fastrtps-cpp \
     && rm -rf /var/lib/apt/lists/*
 
