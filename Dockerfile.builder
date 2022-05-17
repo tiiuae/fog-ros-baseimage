@@ -41,3 +41,30 @@ RUN groupadd -g $GID builder && \
     echo 'builder ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 COPY builder/packaging /packaging
+
+ARG GO_VERSION=1.18.2
+
+# Install golang
+RUN curl -L https://golang.org/dl/go$GO_VERSION.linux-amd64.tar.gz \
+    | tar -xzC /usr/local
+
+ENV GOPATH=/go \
+    GOBIN="$GOPATH/bin" \
+    PATH="/usr/local/go/bin:$PATH:$GOBIN"
+
+# Install C/C++ compiler for cgo and version control software for installing Go
+# modules
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        bzr \
+        git \
+        mercurial \
+        subversion && \
+    rm -rf /var/lib/apt/lists/*
+
+SHELL [ "/bin/bash", "-c" ]
+
+ENV BASH_ENV="/opt/ros/$ROS_DISTRO/setup.bash" \
+    RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /etc/bash.bashrc && \
+	echo "RMW_IMPLEMENTATION=$RMW_IMPLEMENTATION" >> /etc/bash.bashrc

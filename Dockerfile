@@ -2,6 +2,8 @@ ARG ROS_DISTRO=galactic
 
 FROM ros:${ROS_DISTRO}-ros-core
 
+ARG ROS_DISTRO
+
 # Use FastRTPS as ROS pub/sub messaging subsystem ("middleware") implementation.
 # https://docs.ros.org/en/foxy/How-To-Guides/Working-with-multiple-RMW-implementations.html#specifying-rmw-implementations
 # (an alternative value could be "rmw_cyclonedds_cpp".)
@@ -35,3 +37,9 @@ RUN apt install -y \
 
 # wrapper used to launch ros with proper environment variables
 COPY ros-with-env.sh /usr/bin/ros-with-env
+
+SHELL [ "/bin/bash", "-c" ]
+
+ENV BASH_ENV="/opt/ros/$ROS_DISTRO/setup.bash"
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /etc/bash.bashrc && \
+	echo "RMW_IMPLEMENTATION=$RMW_IMPLEMENTATION" >> /etc/bash.bashrc
