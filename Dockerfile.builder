@@ -62,6 +62,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         subversion && \
     rm -rf /var/lib/apt/lists/*
 
+# The following enables automatic sourcing of the ROS environment. rclgo-gen
+# uses the ROS environment to find ROS interface definitions.
 SHELL [ "/bin/bash", "-c" ]
 
 ENV BASH_ENV="/opt/ros/$ROS_DISTRO/setup.bash" \
