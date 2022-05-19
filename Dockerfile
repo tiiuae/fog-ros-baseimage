@@ -54,3 +54,8 @@ RUN apt-get update && \
         libp11-dev \
         pkcs11-proxy1 && \
 	rm -rf /var/lib/apt/lists/*
+
+SHELL [ "/bin/bash", "-c" ]
+
+ENV BASH_ENV="/opt/ros/$ROS_DISTRO/setup.bash"
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /etc/bash.bashrc
