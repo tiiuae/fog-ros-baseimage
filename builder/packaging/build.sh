@@ -129,7 +129,13 @@ function build_process {
 		step build_underlay_deps /main_ws/src
 	fi
 
-	/packaging/package.sh
+	if [[ ! -e package.xml ]]; then
+		pushd $(dirname $(find -name package.xml))
+		/packaging/package.sh
+		popd
+	else
+		/packaging/package.sh
+	fi
 }
 
 # not being sourced?

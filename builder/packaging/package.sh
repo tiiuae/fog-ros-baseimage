@@ -141,7 +141,11 @@ fi
 mkdir -p "$output_dir"
 
 echo "[INFO] Move debian packages."
-cp ${mod_dir}/../*.deb ${mod_dir}/../*.ddeb "$output_dir"
+cp ${mod_dir}/../*.deb "$output_dir"
+# Some components do not produce ddeb packages.
+if ls ${mod_dir}/../*.ddeb 1> /dev/null 2>&1; then
+	cp ${mod_dir}/../*.ddeb "$output_dir"
+fi
 
 echo "[INFO] Done."
 exit 0
