@@ -129,7 +129,15 @@ function build_process {
 		step build_underlay_deps /main_ws/src
 	fi
 
-	/packaging/package.sh
+	# some projects (currently one: mesh_com) don't have package.xml in project root dir,
+	# so temporarily change to that dir for package.sh to work
+	if [[ ! -e package.xml ]]; then
+		pushd $(dirname $(find -name package.xml))
+		/packaging/package.sh
+		popd
+	else
+		/packaging/package.sh
+	fi
 }
 
 # not being sourced?
