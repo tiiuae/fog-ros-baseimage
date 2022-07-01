@@ -133,14 +133,14 @@ function build_process {
 	# so temporarily change to that dir for package.sh to work
 	if [[ ! -e package.xml ]]; then
 		pushd $(dirname $(find -name package.xml))
-		/packaging/package.sh
+		/packaging/package.sh "$@"
 		popd
 	else
-		/packaging/package.sh
+		/packaging/package.sh "$@"
 	fi
 }
 
 # not being sourced?
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-	build_process
+	build_process "$@"
 fi
