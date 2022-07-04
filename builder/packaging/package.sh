@@ -12,7 +12,7 @@ Params:
     -d  Distribution string in debian changelog.
     -g  Git commit hash.
     -v  Git version string
-    -v  Output dir
+    -o  Output dir
 "
 	exit 0
 }

@@ -9,12 +9,9 @@ jobs:
     strategy:
       matrix:
         repo: [
-          'tiiuae/control_interface',
           'tiiuae/depthai_ctrl',
-          'tiiuae/fog_bumper',
           'tiiuae/mavlink-router',
           'tiiuae/mocap_pose',
-          'tiiuae/navigation',
           'tiiuae/octomap_server2',
           'tiiuae/px4_ros_com',
           'tiiuae/rplidar_ros2'
