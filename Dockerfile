@@ -39,9 +39,8 @@ RUN apt install -y \
 	ros-${ROS_DISTRO}-rosidl-typesupport-fastrtps-c=1.2.1-7~git20220620.b0a519b \
 	ros-${ROS_DISTRO}-rosidl-typesupport-fastrtps-cpp=1.2.1-7~git20220620.b0a519b
 
-# install packages from release 6.1
 RUN apt install -y \
-	ros-${ROS_DISTRO}-fog-msgs=0.0.8-42~git20220104.1d2cf3f \
+	ros-${ROS_DISTRO}-fog-msgs=0.0.9-59~git20220704.0f8324d \
 	ros-${ROS_DISTRO}-px4-msgs=3.0.0-15~git20220104.c12fcdf
 
 # wrapper used to launch ros with proper environment variables
