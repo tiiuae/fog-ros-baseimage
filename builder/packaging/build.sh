@@ -7,6 +7,49 @@
 
 # (fakeroot wraps debian/rules invocation seeming like it's run as root)
 
+usage() {
+	echo "
+Usage: $(basename "$0") [-h] [-b nbr]
+Params:
+    -h  Show help text.
+    -b  Build number. This will be tha last digit of version string (x.x.N).
+"
+	exit 0
+}
+
+check_arg() {
+	if [ "$(echo $1 | cut -c1)" = "-" ]; then
+		return 1
+	else
+		return 0
+	fi
+}
+
+error_arg() {
+	echo "$0: option requires an argument -- $1"
+	usage
+}
+
+# this should refer to the repo's root dir.
+# this used some clever tricks before, but now using just assumption that this is invoked from repo root.
+mod_dir="$(pwd)"
+build_number=0
+
+while getopts "hb:" opt
+do
+	case $opt in
+		h)
+			usage
+			;;
+		b)
+			check_arg $OPTARG && build_number=$OPTARG || error_arg $opt
+			;;
+		\?)
+			usage
+			;;
+	esac
+done
+
 function rosdep_init_update_and_install {
 	local mod_dir="$1" # probably /main_ws/src
 
@@ -142,5 +185,5 @@ function build_process {
 
 # not being sourced?
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-	build_process "$@"
+	build_process -b ${build_number}
 fi
