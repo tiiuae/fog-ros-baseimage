@@ -17,6 +17,8 @@ fastrtps_cmake_module:
     ubuntu: ros-galactic-fastrtps-cmake-module=1.2.1*
 fog_msgs:
     ubuntu: ros-galactic-fog-msgs=0.0.8*
+fognav_msgs:
+    ubuntu: ros-galactic-fognav-msgs=0.1.0*
 foonathan_memory_vendor:
     ubuntu: ros-galactic-foonathan-memory-vendor=1.2.1*
 px4_msgs:
