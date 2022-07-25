@@ -42,7 +42,8 @@ RUN apt install -y \
 # install packages from release 6.1
 RUN apt install -y \
 	ros-${ROS_DISTRO}-fog-msgs=0.0.8-42~git20220104.1d2cf3f \
-	ros-${ROS_DISTRO}-px4-msgs=4.0.0-25~git20220422.0f07b25
+	ros-${ROS_DISTRO}-px4-msgs=4.0.0-25~git20220422.0f07b25 \
+	ros-${ROS_DISTRO}-fognav-msgs=0.1.0-21~git20220713.7afa997
 
 # wrapper used to launch ros with proper environment variables
 COPY ros-with-env.sh /usr/bin/ros-with-env

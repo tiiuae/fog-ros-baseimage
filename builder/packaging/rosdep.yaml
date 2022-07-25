@@ -21,6 +21,8 @@ foonathan_memory_vendor:
     ubuntu: ros-galactic-foonathan-memory-vendor=1.1.0*
 px4_msgs:
     ubuntu: ros-galactic-px4-msgs=4.0.0*
+fognav_msgs:
+    ubuntu: ros-galactic-fognav-msgs=0.1.0*
 rosidl_default_generators:
     ubuntu: ros-galactic-rosidl-default-generators
 rosidl_typesupport_fastrtps_c:
