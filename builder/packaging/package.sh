@@ -120,6 +120,12 @@ fi
 # --parallel flag is needed in "fakeroot debian/rules binary" call.
 export DEB_BUILD_OPTIONS="parallel=`nproc`"
 
+echo "[INFO] Clean up."
+
+# cleanup was used to be done after the build (to get a clean slate for the next build?), but was moved
+# to before the build because it's advantageous to be able to invoke the build process manually for debugging etc.
+rm -rf deps_ws obj-x86_64-linux-gnu debian
+
 # generates makefile at debian/rules, which invokes the actual build.
 # the 'debian/rules "binary --parallel"' hosts the build process.
 # internally it calls debhelper with something like "$ dh binary --parallel -v --buildsystem=cmake --builddirectory=.obj-x86_64-linux-gnu"
@@ -133,9 +139,6 @@ bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro ${ROS_
     && debian/rules clean \
     && debian/rules "binary --parallel" || exit 1
 
-echo "[INFO] Clean up."
-
-rm -rf deps_ws obj-x86_64-linux-gnu debian
 
 if [ -e ${mod_dir}/debian_bak ]; then
 	cp -r debian_bak debian
