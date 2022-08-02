@@ -120,6 +120,10 @@ fi
 # --parallel flag is needed in "fakeroot debian/rules binary" call.
 export DEB_BUILD_OPTIONS="parallel=`nproc`"
 
+# generates makefile at debian/rules, which invokes the actual build.
+# the 'debian/rules "binary --parallel"' hosts the build process.
+# internally it calls debhelper with something like "$ dh binary --parallel -v --buildsystem=cmake --builddirectory=.obj-x86_64-linux-gnu"
+# which uses cmake to run the build, and after it wrap it in a .deb package.
 bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro ${ROS_DISTRO} --place-template-files \
     && sed -i "s/@(DebianInc)@(Distribution)/@(DebianInc)/" debian/changelog.em \
     && [ ! "$distr" = "" ] && sed -i "s/@(Distribution)/${distr}/" debian/changelog.em || : \
