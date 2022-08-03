@@ -96,13 +96,6 @@ version=$(grep "<version>" package.xml | sed 's/[^>]*>\([^<"]*\).*/\1/')
 
 echo "[INFO] Version: ${version}."
 
-#title="$version ($(date +%Y-%m-%d))"
-#cat << EOF_CHANGELOG > CHANGELOG.rst
-#$title
-#$(printf '%*s' "${#title}" | tr ' ' "-")
-#* commit: ${git_commit_hash}
-#EOF_CHANGELOG
-
 if [ -e ${mod_dir}/ros2_ws ]; then
 	# From fog-sw repo.
 	source ${mod_dir}/ros2_ws/install/setup.bash
