@@ -96,13 +96,6 @@ version=$(grep "<version>" package.xml | sed 's/[^>]*>\([^<"]*\).*/\1/')
 
 echo "[INFO] Version: ${version}."
 
-#title="$version ($(date +%Y-%m-%d))"
-#cat << EOF_CHANGELOG > CHANGELOG.rst
-#$title
-#$(printf '%*s' "${#title}" | tr ' ' "-")
-#* commit: ${git_commit_hash}
-#EOF_CHANGELOG
-
 if [ -e ${mod_dir}/ros2_ws ]; then
 	# From fog-sw repo.
 	source ${mod_dir}/ros2_ws/install/setup.bash
@@ -111,39 +104,30 @@ if [ -e ${mod_dir}/deps_ws ]; then
 	source ${mod_dir}/deps_ws/install/setup.bash
 fi
 
-if [ -e ${mod_dir}/debian ]; then
-	cp -r debian debian_bak
-fi
-
 # Speed up builds.
 # In addition to the following environmental variable,
 # --parallel flag is needed in "fakeroot debian/rules binary" call.
 export DEB_BUILD_OPTIONS="parallel=`nproc`"
 
-echo "[INFO] Clean up."
+# generates makefile at debian/rules, which is used to invoke the actual build.
+bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro ${ROS_DISTRO} --place-template-files
 
-# cleanup was used to be done after the build (to get a clean slate for the next build?), but was moved
-# to before the build because it's advantageous to be able to invoke the build process manually for debugging etc.
-rm -rf deps_ws obj-x86_64-linux-gnu debian
+sed -i "s/@(DebianInc)@(Distribution)/@(DebianInc)/" debian/changelog.em
 
-# generates makefile at debian/rules, which invokes the actual build.
-# the 'debian/rules "binary --parallel"' hosts the build process.
+[ ! "$distr" = "" ] && sed -i "s/@(Distribution)/${distr}/" debian/changelog.em || :
+
+bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro ${ROS_DISTRO} --process-template-files -i ${build_nbr}${git_version_string}
+
+sed -i 's/^\tdh_shlibdeps.*/& --dpkg-shlibdeps-params=--ignore-missing-info/g' debian/rules
+
+sed -i "s/\=\([0-9]*\.[0-9]*\.[0-9]*\*\)//g" debian/control
+
+debian/rules clean
+
+# the actual build process magic.
 # internally it calls debhelper with something like "$ dh binary --parallel -v --buildsystem=cmake --builddirectory=.obj-x86_64-linux-gnu"
-# which uses cmake to run the build, and after it wrap it in a .deb package.
-bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro ${ROS_DISTRO} --place-template-files \
-    && sed -i "s/@(DebianInc)@(Distribution)/@(DebianInc)/" debian/changelog.em \
-    && [ ! "$distr" = "" ] && sed -i "s/@(Distribution)/${distr}/" debian/changelog.em || : \
-    && bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro ${ROS_DISTRO} --process-template-files -i ${build_nbr}${git_version_string} \
-    && sed -i 's/^\tdh_shlibdeps.*/& --dpkg-shlibdeps-params=--ignore-missing-info/g' debian/rules \
-		&& sed -i "s/\=\([0-9]*\.[0-9]*\.[0-9]*\*\)//g" debian/control \
-    && debian/rules clean \
-    && debian/rules "binary --parallel" || exit 1
-
-
-if [ -e ${mod_dir}/debian_bak ]; then
-	cp -r debian_bak debian
-	rm -rf debian_bak
-fi
+# debhelper uses cmake to run the build, and after it wrap it in a .deb package.
+debian/rules "binary --parallel"
 
 mkdir -p "$output_dir"
 
