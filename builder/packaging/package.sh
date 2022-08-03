@@ -104,10 +104,6 @@ if [ -e ${mod_dir}/deps_ws ]; then
 	source ${mod_dir}/deps_ws/install/setup.bash
 fi
 
-if [ -e ${mod_dir}/debian ]; then
-	cp -r debian debian_bak
-fi
-
 # Speed up builds.
 # In addition to the following environmental variable,
 # --parallel flag is needed in "fakeroot debian/rules binary" call.
@@ -125,12 +121,6 @@ bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro ${ROS_
 		&& sed -i "s/\=\([0-9]*\.[0-9]*\.[0-9]*\*\)//g" debian/control \
     && debian/rules clean \
     && debian/rules "binary --parallel" || exit 1
-
-
-if [ -e ${mod_dir}/debian_bak ]; then
-	cp -r debian_bak debian
-	rm -rf debian_bak
-fi
 
 mkdir -p "$output_dir"
 
